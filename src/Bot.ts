@@ -4,13 +4,21 @@ import { Router } from './router';
 import { Terminal } from './core/Terminal';
 
 import TelegramBot from 'node-telegram-bot-api';
-export class Bot {
-    public terminal: Terminal;
-    public platform!: TelegramBot;
+class Bot {
+    private static _me: Bot;
+    private _terminal: Terminal;
+    private _platform!: TelegramBot;
 
-    constructor(){
-        this.terminal = new Terminal();
-        
+    private constructor(){
+        this._terminal = new Terminal();
+    }
+
+    public static get me():Bot {
+        if(!Bot._me){
+            Bot._me = new Bot();
+        }
+
+        return Bot._me;
     }
 
     public init(): void{
@@ -21,14 +29,24 @@ export class Bot {
 
     private initPlatform(): void{
         if(env.NODE_ENV === 'production'){
-            this.platform = new TelegramBot(env.TOKEN || "", { polling: true });
+            this._platform = new TelegramBot(env.TOKEN || "", { polling: true });
         }else {
-            this.platform = new TelegramBot(env.TOKEN || "", { polling: true });
+            this._platform = new TelegramBot(env.TOKEN || "", { polling: true });
         }
     }
 
     private listen(): void{
-        const router = new Router(this);
-        router.init();
+        const router = new Router();
+        router.init(this._platform);
+    }
+    
+    public get platform(): TelegramBot{
+        return this._platform;
+    }
+
+    public get terminal(): Terminal{
+        return this._terminal;
     }
 }
+
+export const bot = Bot.me;

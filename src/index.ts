@@ -1,5 +1,3 @@
-import { Bot } from "./Bot";
-
-export const rickAndMortyBot = new Bot();
+import { bot as rickAndMortyBot } from "./Bot";
 
 rickAndMortyBot.init();

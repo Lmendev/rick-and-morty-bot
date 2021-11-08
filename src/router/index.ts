@@ -1,17 +1,18 @@
 import TelegramBot from "node-telegram-bot-api";
-import { Bot } from "../Bot"
-import { getCharacter } from "../controllers/character";
+import { start, help, settings, about } from "../controllers";
 export class Router {
-    private bot: Bot;
-
-    constructor(bot: Bot){
-        this.bot = bot;
-    }
-
-    public init (){
-        const platform:TelegramBot = this.bot.platform;
+    public init (platform: TelegramBot) {
+        platform.onText(/\/start/, start);
+        /*
+        platform.onText(/\/help/, help);
+        platform.onText(/\/settings/, settings);
+        platform.onText(/\/about/, about);
         
-        platform.onText(/\/start/, getCharacter)
-        platform.onText(/\/about/, () => {})
+        /*
+        platform.onText(/\/search/, botSearch)
+        platform.onText(/\/random/, botRandom)
+        platform.onText(/\/mycards/, botMyCards)
+        platform.onText(/\/hacker/, botHacker)
+        */
     }
 }

@@ -1,14 +1,15 @@
 import { ICommand } from "./ICommand"
 import { getCharacter } from "../../services/character"
 
-export class AboutCommand implements ICommand {
+export class SettingsCommand implements ICommand {
     name: string
     
     constructor(){
-        this.name = "about"
+        this.name = "settings"
     }
 
     public execute(): void{
-        console.log();
+        console.log(getCharacter(1));
+        console.log('about executed')
     }
 }

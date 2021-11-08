@@ -1,6 +1,7 @@
 import { ICommand } from "./commands/ICommand"
 
-import { AboutCommand } from "./commands/AboutCommand";
+import { AboutCommand, } from "./commands/AboutCommand";
+import { StartCommand } from "./commands/StartCommand";
 
 export class Terminal {
     private commands: ICommand[];
@@ -9,6 +10,7 @@ export class Terminal {
         this.commands = []
 
         this.setCommand(new AboutCommand());
+        this.setCommand(new StartCommand());
     }
 
     public setCommand(command: ICommand): void{

@@ -1,6 +1,8 @@
 import { Message } from "node-telegram-bot-api";
-import { rickAndMortyBot } from ".."
+import { Bot } from "../Bot";
+
+const terminal = Bot.me.terminal;
 
 export const getCharacter = async (msg: Message) =>  {
-    rickAndMortyBot.terminal.executeCommand("about");
+    terminal.executeCommand("about");
 }
