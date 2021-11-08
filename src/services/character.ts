@@ -6,3 +6,12 @@ export const getCharacter = async (characterId: number) => {
     return apiResponse.data;
 };
 
+export const getRandomCharacter = async () => {
+    const id = Math.floor(Math.random() * 826) + 1;
+
+    const apiResponse:ApiResponse<Character> = await getCharacterFromRickmortyapi(id)
+    return apiResponse.data;
+};
+
+
+

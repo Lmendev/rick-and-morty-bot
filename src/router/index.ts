@@ -1,8 +1,11 @@
 import TelegramBot from "node-telegram-bot-api";
-import { start, help, settings, about } from "../controllers";
+import { start, help, settings, about, random, callbackQuery} from "../controllers";
 export class Router {
     public init (platform: TelegramBot) {
         platform.onText(/\/start/, start);
+        platform.onText(/\/random/, random)
+        
+        platform.on('callback_query', callbackQuery)
         /*
         platform.onText(/\/help/, help);
         platform.onText(/\/settings/, settings);
@@ -10,7 +13,7 @@ export class Router {
         
         /*
         platform.onText(/\/search/, botSearch)
-        platform.onText(/\/random/, botRandom)
+        
         platform.onText(/\/mycards/, botMyCards)
         platform.onText(/\/hacker/, botHacker)
         */

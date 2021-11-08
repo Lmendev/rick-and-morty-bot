@@ -4,9 +4,14 @@ import { bot } from "../Bot";
 
 export const start = (msg: TelegramBot.Message) => {
     //const terminal = ;
-    console.log(msg);
+    //console.log(msg);
     
-    bot.terminal.executeCommand("start");
+    bot.terminal.executeCommand("start", msg);
+}
+
+export const random = (msg: TelegramBot.Message) =>  {
+    console.log('a')
+    bot.terminal.executeCommand("random");
 }
 
 export const help = async () =>  {
@@ -19,4 +24,14 @@ export const settings = async () =>  {
 
 export const about = async () =>  {
     bot.terminal.executeCommand("about");
+}
+
+export const callbackQuery = (msg: TelegramBot.CallbackQuery) =>  {
+    if(msg.data === 'random'){
+        bot.terminal.executeCommand("random", msg);
+
+        console.log(msg)
+    }
+
+    //bot.terminal.executeCommand("callbackQuery");
 }
