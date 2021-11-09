@@ -1,17 +1,12 @@
 //import TelegramBot from "node-telegram-bot-api";
-import TelegramBot from "node-telegram-bot-api";
+import TelegramBot, { CallbackQuery, Message, InlineQuery } from "node-telegram-bot-api";
 import { bot } from "../Bot";
 
-export const start = (msg: TelegramBot.Message) => {
+export const start = (msg: Message | CallbackQuery) => {
     //const terminal = ;
     //console.log(msg);
     
     bot.terminal.executeCommand("start", msg);
-}
-
-export const random = (msg: TelegramBot.Message) =>  {
-    console.log('a')
-    bot.terminal.executeCommand("random");
 }
 
 export const help = async () =>  {
@@ -22,16 +17,14 @@ export const settings = async () =>  {
     bot.terminal.executeCommand("settings");
 }
 
-export const about = async () =>  {
-    bot.terminal.executeCommand("about");
+export const about = (msg: Message | CallbackQuery) =>  {
+    bot.terminal.executeCommand("about", msg);
 }
 
-export const callbackQuery = (msg: TelegramBot.CallbackQuery) =>  {
-    if(msg.data === 'random'){
-        bot.terminal.executeCommand("random", msg);
+export const underDevelopment = (msg: Message | CallbackQuery) =>  {
+    bot.terminal.executeCommand("underDevelopment", msg);
+}
 
-        console.log(msg)
-    }
-
-    //bot.terminal.executeCommand("callbackQuery");
+export const inlineQueryHandler = (msg: InlineQuery) =>  {
+    bot.terminal.executeCommand("inlineQuery", msg);
 }

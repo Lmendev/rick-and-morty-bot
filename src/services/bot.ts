@@ -1,9 +1,13 @@
-import TelegramBot from 'node-telegram-bot-api';
-import { version, description } from '../../package.json';
+import TelegramBot, { ParseMode } from 'node-telegram-bot-api';
+
+const { 
+    npm_package_name:name, 
+    npm_package_description:description, 
+    npm_package_version: version
+} = process.env
 
 export const getStartGreeting = () => {
-    const parse_mode: TelegramBot.ParseMode = "HTML"
-
+    const parse_mode:ParseMode = "HTML"
     return {
         photo:  'https://miro.medium.com/freeze/max/480/0*t75wxMkidc4GFYxR.gif',
         caption: `<b>Welcome to ${description}!</b>\nI can look for Rick and Morty information 🤖`,
@@ -17,5 +21,19 @@ export const getStartGreeting = () => {
         },
         parse_mode
     }
-    
+};
+
+export const getAboutMessage = () => {
+    const parse_mode:ParseMode = "HTML"
+
+    return {
+        photo:  'https://miro.medium.com/freeze/max/480/0*t75wxMkidc4GFYxR.gif',
+        caption: `<b>About me</b>\n🤖 <b>Name</b>: ${name}\n🟢 <b>Version</b>:  v${version}\n🧑🏽‍💻 <b>Created by</b>: @lmendev`,
+        reply_markup: {
+            inline_keyboard: [
+                [{text: "🔙 Back", callback_data: "start"}]
+            ]
+        },
+        parse_mode
+    }
 };

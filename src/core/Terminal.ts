@@ -3,6 +3,9 @@ import { ICommand } from "./commands/ICommand"
 import { AboutCommand, } from "./commands/AboutCommand";
 import { StartCommand } from "./commands/StartCommand";
 import { RandomCommand } from "./commands/RandomCommand";
+import { underDevelopment } from "../controllers";
+import { UnderDevelopmentCommand } from "./commands/UnderDevelopmentCommand";
+import { InlineQueryCommand } from "./commands/InlineQueryCommand";
 
 export class Terminal {
     private commands: ICommand[];
@@ -13,6 +16,8 @@ export class Terminal {
         this.setCommand(new StartCommand());
         this.setCommand(new AboutCommand());
         this.setCommand(new RandomCommand());
+        this.setCommand(new UnderDevelopmentCommand());
+        this.setCommand(new InlineQueryCommand());
     }
 
     public setCommand(command: ICommand): void{
