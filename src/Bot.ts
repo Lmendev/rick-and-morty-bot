@@ -29,7 +29,8 @@ class Bot {
 
     private initPlatform(): void{
         if(env.NODE_ENV === 'production'){
-            this._platform = new TelegramBot(env.TOKEN || "", { polling: true });
+            this._platform = new TelegramBot(env.TOKEN || '', { webHook: {port: +(env.PORT || 0) } })
+            this._platform.setWebHook(`${env.APP_URL}/bot${env.TOKEN}`)
         }else {
             this._platform = new TelegramBot(env.TOKEN || "", { polling: true });
         }
